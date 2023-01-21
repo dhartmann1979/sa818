@@ -123,10 +123,10 @@ class SA818:
       tx_tone, rx_tone = ['0000', '0000']
 
     if opts.offset == 0.0:
-      tx_freq = rx_freq = "{:.4f}".format(opts.frequency)
+      tx_freq = rx_freq = "{:.5f}".format(opts.frequency)
     else:
-      rx_freq = "{:.4f}".format(opts.frequency)
-      tx_freq = "{:.4f}".format(opts.frequency + opts.offset)
+      rx_freq = "{:.5f}".format(opts.frequency)
+      tx_freq = "{:.5f}".format(opts.frequency + opts.offset)
 
     cmd = "{}={},{},{},{},{},{}".format(self.SETGRP, opts.bw, tx_freq, rx_freq,
                                         tx_tone, opts.squelch, rx_tone)
@@ -196,7 +196,7 @@ def type_frequency(parg):
   except ValueError:
     raise argparse.ArgumentTypeError from None
 
-  if not 144 < frequency < 148 and not 420 < frequency < 450:
+  if not 134 < frequency < 174 and not 400 < frequency < 480:
     logger.error('Frequency outside the amateur bands')
     raise argparse.ArgumentError
   return frequency
