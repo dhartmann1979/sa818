@@ -49,7 +49,7 @@ class SA818:
   VOLUME = "AT+DMOSETVOLUME"
   TAIL = "AT+SETTAIL"
   NARROW = 0
-  PORTS = ('/dev/serial0', '/dev/ttyUSB0')
+  PORTS = ('/dev/serial1', '/dev/ttyUSB0')
   READ_TIMEOUT = 3.0
 
   def __init__(self, port=None, baud=DEFAULT_BAUDRATE):
@@ -123,10 +123,10 @@ class SA818:
       tx_tone, rx_tone = ['0000', '0000']
 
     if opts.offset == 0.0:
-      tx_freq = rx_freq = "{:.5f}".format(opts.frequency)
+      tx_freq = rx_freq = "{:.4f}".format(opts.frequency)
     else:
-      rx_freq = "{:.5f}".format(opts.frequency)
-      tx_freq = "{:.5f}".format(opts.frequency + opts.offset)
+      rx_freq = "{:.4f}".format(opts.frequency)
+      tx_freq = "{:.4f}".format(opts.frequency + opts.offset)
 
     cmd = "{}={},{},{},{},{},{}".format(self.SETGRP, opts.bw, tx_freq, rx_freq,
                                         tx_tone, opts.squelch, rx_tone)
